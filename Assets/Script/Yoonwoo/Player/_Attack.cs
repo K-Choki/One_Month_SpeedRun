@@ -88,7 +88,6 @@ public class _Attack : MonoBehaviour
         rb.gravityScale = 0f;
 
         float dir = playerctrl.IML ? -1f : 1f;
-        Vector2 BackUpVelocity = rb.linearVelocity;
         rb.linearVelocity = new Vector2(dir * attackDashSpeed, 0f);
         Debug.Log(rb.linearVelocity);
         yield return new WaitForSeconds(attackDashTime);
