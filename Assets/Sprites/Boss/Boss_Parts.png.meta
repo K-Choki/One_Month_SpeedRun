@@ -157,10 +157,10 @@ TextureImporter:
       name: Boss_Parts_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 451
-        width: 250
-        height: 150
+        x: 25
+        y: 523
+        width: 206
+        height: 73
       alignment: 9
       pivot: {x: 0.4987379, y: 0.65986407}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: Boss_Parts_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 451
-        width: 250
-        height: 150
+        x: 264
+        y: 535
+        width: 217
+        height: 62
       alignment: 9
       pivot: {x: 0.50378615, y: 0.71245116}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: Boss_Parts_2
       rect:
         serializedVersion: 2
-        x: 500
-        y: 451
-        width: 250
-        height: 150
+        x: 507
+        y: 533
+        width: 225
+        height: 68
       alignment: 9
       pivot: {x: 0.49747583, y: 0.7019336}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: Boss_Parts_3
       rect:
         serializedVersion: 2
-        x: 750
-        y: 451
-        width: 250
-        height: 150
+        x: 852
+        y: 508
+        width: 43
+        height: 53
       alignment: 9
       pivot: {x: 0.49747583, y: 0.55469036}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: Boss_Parts_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 301
-        width: 250
-        height: 150
+        x: 105
+        y: 332
+        width: 39
+        height: 44
       alignment: 9
       pivot: {x: 0.4987379, y: 0.38641194}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,12 +267,12 @@ TextureImporter:
       name: Boss_Parts_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 301
-        width: 250
-        height: 150
+        x: 354
+        y: 402
+        width: 16
+        height: 9
       alignment: 9
-      pivot: {x: 0.45077845, y: 0.70403725}
+      pivot: {x: 0.44992492, y: 0.6763031}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -289,10 +289,10 @@ TextureImporter:
       name: Boss_Parts_6
       rect:
         serializedVersion: 2
-        x: 500
-        y: 301
-        width: 250
-        height: 150
+        x: 604
+        y: 400
+        width: 16
+        height: 14
       alignment: 9
       pivot: {x: 0.44320604, y: 0.7019336}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,10 +311,10 @@ TextureImporter:
       name: Boss_Parts_7
       rect:
         serializedVersion: 2
-        x: 750
-        y: 301
-        width: 250
-        height: 150
+        x: 856
+        y: 385
+        width: 35
+        height: 8
       alignment: 9
       pivot: {x: 0.4974756, y: 0.55469036}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,10 +333,10 @@ TextureImporter:
       name: Boss_Parts_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 151
-        width: 250
-        height: 150
+        x: 76
+        y: 179
+        width: 103
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,10 +355,10 @@ TextureImporter:
       name: Boss_Parts_9
       rect:
         serializedVersion: 2
-        x: 250
-        y: 151
-        width: 250
-        height: 150
+        x: 327
+        y: 180
+        width: 98
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,10 +377,10 @@ TextureImporter:
       name: Boss_Parts_10
       rect:
         serializedVersion: 2
-        x: 500
-        y: 151
-        width: 250
-        height: 150
+        x: 586
+        y: 185
+        width: 73
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -399,10 +399,10 @@ TextureImporter:
       name: Boss_Parts_11
       rect:
         serializedVersion: 2
-        x: 750
-        y: 151
-        width: 250
-        height: 150
+        x: 838
+        y: 180
+        width: 73
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -421,10 +421,10 @@ TextureImporter:
       name: Boss_Parts_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 250
-        height: 150
+        x: 93
+        y: 23
+        width: 73
+        height: 111
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -443,10 +443,10 @@ TextureImporter:
       name: Boss_Parts_13
       rect:
         serializedVersion: 2
-        x: 250
-        y: 1
-        width: 250
-        height: 150
+        x: 344
+        y: 21
+        width: 73
+        height: 111
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +465,10 @@ TextureImporter:
       name: Boss_Parts_14
       rect:
         serializedVersion: 2
-        x: 500
-        y: 1
-        width: 250
-        height: 150
+        x: 524
+        y: 5
+        width: 205
+        height: 141
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
