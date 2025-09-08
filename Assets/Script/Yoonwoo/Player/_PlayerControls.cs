@@ -91,10 +91,15 @@ public class _PlayerControls : MonoBehaviour
     void LateUpdate()
     {
         anim.SetFloat("Speed", moveInput.magnitude);
-        if (moveInput.x != 0)
+        if (IML)
         {
-            IML = spriter.flipX = moveInput.x < 0;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
+        
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -123,7 +128,6 @@ public class _PlayerControls : MonoBehaviour
 
         //왼쪽이면 -1 , 오른쪽이면 +1
         float dashDir = IML ? -1f : 1f;
-        Vector2 BackUpVelocity = rb.linearVelocity;
         rb.linearVelocity = new Vector2(dashDir * DashSpeed, 0f);
         yield return new WaitForSeconds(DashTime);
 
@@ -187,7 +191,7 @@ public class _PlayerControls : MonoBehaviour
         SpriteRenderer CtrlVsr = clone.GetComponent<SpriteRenderer>();
         CtrlVsr.sprite = spriter.sprite;
 
-        CtrlVsr.flipX = spriter.flipX;
+        CtrlVsr.flipX = IML;
 
         CtrlVsr.sortingLayerID = spriter.sortingLayerID;
 
