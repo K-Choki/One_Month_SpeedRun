@@ -12,7 +12,7 @@ public class _Attack : MonoBehaviour
     private SpriteRenderer spriter;
     private Vector2 moveInput;
     private int AttackCount = 0;
-    private bool isAttack = false;
+    public bool isAttack = false;
     private float lastAttackTime;
     [SerializeField] private float attackDashSpeed = 5f;
     [SerializeField] private float attackDashTime = 0.2f;
@@ -57,15 +57,16 @@ public class _Attack : MonoBehaviour
         {
             AttackCount = 0;
             Debug.Log("콤보 초기화");
+            playerctrl.isJump = true;
         }
         if (!isAttack)
         {
+            isAttack = true;
+            playerctrl.isJump = false;
             AttackCount++;
             if (AttackCount > 2) AttackCount = 1;
 
             Debug.Log("AttackCount :" + AttackCount);
-
-            isAttack = true;
             lastAttackTime = Time.time;
 
             anim.SetInteger("AttackCount", AttackCount);

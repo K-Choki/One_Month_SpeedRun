@@ -11,6 +11,8 @@ public class _PlayerControls : MonoBehaviour
     private Vector2 moveInput;
     private Animator anim;
     private SpriteRenderer spriter;
+    private _Attack _attack;
+
 
     [Header("캐릭터 움직임 관련")]
     public float moveSpeed = 5f;
@@ -26,6 +28,7 @@ public class _PlayerControls : MonoBehaviour
     public bool canMove = true;
     private bool isDash = false;
     private bool isDashCooldown = false;
+    public bool isJump = true;
     
 
     [Header("대시 관련")]
@@ -91,25 +94,34 @@ public class _PlayerControls : MonoBehaviour
     void LateUpdate()
     {
         anim.SetFloat("Speed", moveInput.magnitude);
-        if (IML)
+
+        if (moveInput.x != 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (IML = moveInput.x < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.identity;
+            }
         }
-        else
-        {
-            transform.rotation = Quaternion.identity;
-        }
-        
     }
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (isGround == true)
+        if (_attack.isAttack= false)
         {
-            rb.linearVelocityY = 0; // 지면에 닿으면 y 속도 초기화
-
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJump = true;
         }
+        if (isGround == true)
+            {
+                if (isJump == true)
+                {
+                    rb.linearVelocityY = 0; // 지면에 닿으면 y 속도 초기화
+                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                }
+            }
     }
     private void OnDash(InputAction.CallbackContext context)
     {
@@ -129,7 +141,6 @@ public class _PlayerControls : MonoBehaviour
         //왼쪽이면 -1 , 오른쪽이면 +1
         float dashDir = IML ? -1f : 1f;
         rb.linearVelocity = new Vector2(dashDir * DashSpeed, 0f);
-        yield return new WaitForSeconds(DashTime);
 
         float DashTimer = 0f; //잔상이 생긴후 경과시간
         afterImageIntervelTimer = 0f;
