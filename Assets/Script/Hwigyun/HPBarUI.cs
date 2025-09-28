@@ -1,16 +1,11 @@
-using UnityEngine;
+ using UnityEngine;
+using UnityEngine.UI;
 
 public class HPBarUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Image HPBar;
+    public void SetHealth(float currentHealth, float maxHealth)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        HPBar.fillAmount = currentHealth / maxHealth;
     }
 }

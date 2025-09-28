@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class Long : Monster
@@ -6,6 +7,7 @@ public class Long : Monster
     [Header("Long Settings")]
     [SerializeField]
     private GameObject projectilePrefab;
+    public Transform Player;
     [SerializeField]
     private float attackCooldown = 5f;
     [SerializeField]
@@ -20,7 +22,21 @@ public class Long : Monster
         currentActionCoroutine = StartCoroutine(AttackRoutine());
     }
 
-    protected override void Update() { }
+    protected override void Update()
+    {
+        if (Player == null)
+        {
+            return;
+        }
+        if (Player.position.x < transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
 
     protected override IEnumerator AttackRoutine()
     {
@@ -51,7 +67,7 @@ public class Long : Monster
             Debug.Log("Attack");
             if (projectileScript != null)
             {
-                Vector2 direction = (playerCollider.transform.position - transform.position).normalized;
+                Vector2 direction = (playerCollider.bounds.center - transform.position).normalized;
                 projectileScript.Setup(direction, projectileSpeed, attackDamage);
             }
         }

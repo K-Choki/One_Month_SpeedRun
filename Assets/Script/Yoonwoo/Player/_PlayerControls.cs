@@ -12,6 +12,7 @@ public class _PlayerControls : MonoBehaviour
     private Animator anim;
     private SpriteRenderer spriter;
     private _Attack _attack;
+    private Collider2D playercollider2D;
 
 
     [Header("캐릭터 움직임 관련")]
@@ -47,6 +48,8 @@ public class _PlayerControls : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
+        _attack = GetComponent<_Attack>();
+        playercollider2D = GetComponent<Collider2D>();
 
         //new는 C# 클래스를 새로 생성했을때. ** 헷갈리지 말것 **
         controls = new PlayerInputActions();
@@ -55,8 +58,6 @@ public class _PlayerControls : MonoBehaviour
         controls.Player.Dash.performed += OnDash;
         controls.Player.Skill1.performed += OnSkill1;
         controls.Player.Skill2.performed += OnSkill2;
-
-        controls.Player.FallThrough.performed += OnFallThrough;
 
         //이건 계속 캐릭터 파일이 업데이트되기 때문에 혹시나 rb 파일 없을때를 대비해서 알람용 ** 마지막에 삭제 **
         if (rb == null)
@@ -80,8 +81,7 @@ public class _PlayerControls : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (canMove == true)
+        if (canMove)
         {
             moveInput = controls.Player.Move.ReadValue<Vector2>();
             transform.position += (Vector3)moveInput * moveSpeed * Time.deltaTime;
@@ -110,9 +110,9 @@ public class _PlayerControls : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (_attack.isAttack= false)
+        if (_attack.isAttack == true)
         {
-            isJump = true;
+            return;
         }
         if (isGround == true)
             {
@@ -134,6 +134,7 @@ public class _PlayerControls : MonoBehaviour
         isDash = true;
         isDashCooldown = true;
         rb.gravityScale = 0;
+        playercollider2D.enabled = false;
 
 
         anim.SetBool("Dash",true);
@@ -162,6 +163,7 @@ public class _PlayerControls : MonoBehaviour
         isDash = false;
         anim.SetBool("Dash",false);
         rb.gravityScale = 3;
+        playercollider2D.enabled = true;
 
         yield return new WaitForSeconds(DashCooldown);
         isDashCooldown = false;
@@ -176,10 +178,6 @@ public class _PlayerControls : MonoBehaviour
     {
         Debug.Log("Skill2!");
         //Skill2 Logic
-    }
-    private void OnFallThrough(InputAction.CallbackContext context) //불리언 아래키 누르면 true 되면 space 입력받고 떨어지기    
-    {
-        Debug.Log("Fall!");
     }
     public void TakeDamage(float damage, Vector3 knockbackDirection)
     {

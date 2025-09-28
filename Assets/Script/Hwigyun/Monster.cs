@@ -20,7 +20,7 @@ public class Monster : MonoBehaviour
     protected static readonly int AnimKnockback = Animator.StringToHash("Knockback");
     protected static readonly int AnimDead = Animator.StringToHash("Dead");
 
-    [Header("???? & ?úô")]
+    [Header("???? & ?ï¿½ï¿½")]
     protected Rigidbody2D rb;
     [SerializeField]
     protected float knockbackForce = 5f;
@@ -78,12 +78,6 @@ public class Monster : MonoBehaviour
     {
         anim.SetFloat(AnimSpeed, Mathf.Abs(rb.linearVelocityX));
     }
-
-    protected virtual void FixedUpdate()
-    {
-
-    }
-
     public void SetState(MonsterState newState)
     {
         if(currentState == MonsterState.Dead) return;
@@ -169,13 +163,13 @@ public class Monster : MonoBehaviour
         if(playerCollider != null)
         {
             playerGameObject = playerCollider.gameObject;
-            //Debug.Log($"Is Player In Range : ?¡À???? ????! : {targetPlayer.name}");
+            //Debug.Log($"Is Player In Range : ?ï¿½ï¿½???? ????! : {targetPlayer.name}");
             return true;
         }
         else
         {
             playerGameObject = null;
-            //Debug.Log("Is Player In Range : ?¡À???? ????");
+            //Debug.Log("Is Player In Range : ?ï¿½ï¿½???? ????");
             return false;
         }
     }
@@ -204,7 +198,7 @@ public class Monster : MonoBehaviour
             AttackBox attackBox = attackHitbox.GetComponent<AttackBox>();
             attackBox.Setup(attackDamage);
             attackHitbox.SetActive(true);
-            Debug.Log("???? ????");
+            Debug.Log("HitBox Enable");
         }
     }
 
@@ -213,7 +207,7 @@ public class Monster : MonoBehaviour
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(false);
-            Debug.Log("???? ????");
+            Debug.Log("HitBox Disable");
         }
     }
 }

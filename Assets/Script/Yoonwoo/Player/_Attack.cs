@@ -12,6 +12,7 @@ public class _Attack : MonoBehaviour
     private SpriteRenderer spriter;
     private Vector2 moveInput;
     private int AttackCount = 0;
+    private IEnumerator dashCoroutine;
     public bool isAttack = false;
     private float lastAttackTime;
     [SerializeField] private float attackDashSpeed = 5f;
@@ -38,6 +39,11 @@ public class _Attack : MonoBehaviour
         {
             moveInput = controls.Player.Move.ReadValue<Vector2>();
         }
+
+        if (playerctrl.isJump == true && dashCoroutine != null)
+        {
+            StopDash();
+        }
     }
 
     private void OnEnable()
@@ -57,12 +63,10 @@ public class _Attack : MonoBehaviour
         {
             AttackCount = 0;
             Debug.Log("콤보 초기화");
-            playerctrl.isJump = true;
         }
         if (!isAttack)
         {
             isAttack = true;
-            playerctrl.isJump = false;
             AttackCount++;
             if (AttackCount > 2) AttackCount = 1;
 
@@ -74,16 +78,16 @@ public class _Attack : MonoBehaviour
         }
         if (AttackCount == 2)
         {
-            StartCoroutine(AttackDash());
             AttackCount = 0;
+            dashCoroutine = AttackDash();
+            StartCoroutine(dashCoroutine);
         }
         else
         {
             Debug.Log("공격 무시됨");
         }
     }
-
-    private IEnumerator AttackDash() //moveSpeed , jumpForce = 0바꾸기
+    private IEnumerator AttackDash() //moveSpeed , jumpForce = 0 
     {
         playerctrl.canMove = false;
         rb.gravityScale = 0f;
@@ -96,8 +100,14 @@ public class _Attack : MonoBehaviour
         playerctrl.canMove = true;
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 3f;
-
-        
+        dashCoroutine = null;
+    }
+    private void StopDash()
+    {
+        rb.linearVelocityX = 0f;
+        playerctrl.canMove = true;
+        rb.gravityScale = 3f;
+        dashCoroutine = null;
     }
     public void EndAttack()
     {

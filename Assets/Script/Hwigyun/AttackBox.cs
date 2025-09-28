@@ -11,7 +11,7 @@ public class AttackBox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+        PlayerStats playerHealth = collision.GetComponent<PlayerStats>();
         if (playerHealth != null && collision.gameObject.CompareTag("Player"))
         {
             playerHealth.TakeDamage(damage);

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Vector2 direction;
+    private PlayerStats playerStats;
     private float speed;
     private float damage;
 
@@ -29,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.isTrigger) return;
 
-        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+        PlayerStats playerHealth = collision.GetComponent<PlayerStats>();
         if(playerHealth != null && collision.gameObject.CompareTag("Player"))
         {
             playerHealth.TakeDamage(damage);

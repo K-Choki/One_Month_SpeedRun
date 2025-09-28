@@ -23,7 +23,7 @@ public class Small : Monster
     protected override void Start()
     {
         base.Start();
-        patrolStartPosition = transform.position; 
+        patrolStartPosition = transform.position;
         SetState(MonsterState.Idle);
     }
 
@@ -31,9 +31,9 @@ public class Small : Monster
     {
         base.Update();
 
-        if (currentState == MonsterState.Special || 
-            currentState == MonsterState.Dead || 
-            currentState == MonsterState.Knockback || 
+        if (currentState == MonsterState.Special ||
+            currentState == MonsterState.Dead ||
+            currentState == MonsterState.Knockback ||
             currentState == MonsterState.Attack) return;
 
         bool playerDetected = IsPlayerInRange(detectionRange, out targetPlayer);
@@ -53,33 +53,28 @@ public class Small : Monster
             case MonsterState.Patrol:
                 if (playerDetected)
                 {
-                    //Debug.Log($"Patrol -> Chase : �÷��̾� ����! : {targetPlayer.name}");
                     ChangeState(MonsterState.Chase);
                 }
                 break;
             case MonsterState.Chase:
                 if (!playerDetected)
                 {
-                    //Debug.Log($"Chase -> Patrol : �÷��̾� �̰���!");
                     ChangeState(MonsterState.Patrol);
                 }
                 else if (IsPlayerInRange(attackRange, out GameObject attackTarget))
                 {
-                    //Debug.Log($"Chase -> Attack : ���� ���� ����");
                     ChangeState(MonsterState.Attack);
                 }
                 else
                 {
-                    if(targetPlayer != null)
+                    if (targetPlayer != null)
                     {
-                        //Debug.Log($"�÷��̾� ����! : {targetPlayer.name}");
                         ChaseLogic();
                     }
                     else
                     {
-                        //Debug.Log("�߰� �����ε� Ÿ���� ����!!!! �ϴ� ������ ���ư�."); // ����
-                        ChangeState(MonsterState.Patrol); // ���� ������
-                    }    
+                        ChangeState(MonsterState.Patrol);
+                    }
                 }
                 break;
         }
@@ -106,7 +101,7 @@ public class Small : Monster
 
     private void ChangeState(MonsterState newState)
     {
-        if(currentState == newState) return;
+        if (currentState == newState) return;
         if (currentState == MonsterState.Dead) return;
 
         if (currentActionCoroutine != null)
@@ -142,18 +137,18 @@ public class Small : Monster
 
     private IEnumerator PatrolRoutine()
     {
-        while(true)
+        while (true)
         {
             Vector2 targetPosition = patrolStartPosition + new Vector2(patrolRange * patrolDirection, 0);
 
-            while(Mathf.Abs(transform.position.x - targetPosition.x) > 0.1f)
+            while (Mathf.Abs(transform.position.x - targetPosition.x) > 0.1f)
             {
-                if(currentState != MonsterState.Patrol) yield break;
+                if (currentState != MonsterState.Patrol) yield break;
 
                 float moveDirectionX = Mathf.Sign(targetPosition.x - transform.position.x);
                 rb.linearVelocityX = moveDirectionX * moveSpeed;
 
-                if((moveDirectionX > 0 && !isFacingRight) || (moveDirectionX < 0 && isFacingRight))
+                if ((moveDirectionX > 0 && !isFacingRight) || (moveDirectionX < 0 && isFacingRight))
                 {
                     Flip();
                 }
@@ -161,7 +156,7 @@ public class Small : Monster
             }
 
             rb.linearVelocityX = 0;
-            
+
             yield return new WaitForSeconds(stopDurationAtPatrolEnd);
 
             if (currentState != MonsterState.Patrol) yield break;
@@ -184,7 +179,7 @@ public class Small : Monster
         float currentX = transform.position.x;
 
         float moveDirectionX = 0;
-        if(Mathf.Abs(targetX - currentX) > 0.1f)
+        if (Mathf.Abs(targetX - currentX) > 0.1f)
         {
             moveDirectionX = Mathf.Sign(targetX - currentX);
         }
@@ -200,7 +195,6 @@ public class Small : Monster
     protected override IEnumerator AttackRoutine()
     {
         anim.SetTrigger(AnimAttack);
-
         float timer = 0f;
         while (timer < attackDuration)
         {
@@ -217,6 +211,14 @@ public class Small : Monster
 
         Debug.Log("Small Attack Okay!");
         ChangeState(MonsterState.Special);
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerStats playerHealth = collision.GetComponent<PlayerStats>();
+        if(playerHealth != null && collision.gameObject.CompareTag("Player"))
+        {
+            playerHealth.TakeDamage(attackDamage);
+        }
     }
 
     protected IEnumerator SpecialStateRoutine()
@@ -251,4 +253,5 @@ public class Small : Monster
         Gizmos.DrawWireSphere(patrolStartPosition, 0.2f);
         Gizmos.DrawWireSphere(patrolStartPosition + new Vector2(patrolRange * patrolDirection, 0), 0.2f);
     }
+    
 }
